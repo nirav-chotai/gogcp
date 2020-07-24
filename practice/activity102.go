@@ -10,7 +10,5 @@ func main() {
 }
 func swap(a *int, b *int) {
 	// swap the values here
-	temp := *a
-	*a = *b
-	*b = temp
+	*a, *b = *b, *a
 }
