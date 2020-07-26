@@ -1,3 +1,5 @@
+// Activity 5.02
+
 package main
 
 import "fmt"
