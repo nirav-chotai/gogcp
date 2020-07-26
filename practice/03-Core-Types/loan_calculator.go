@@ -14,10 +14,10 @@ const (
 )
 
 var (
-	ErrCreditScore = errors.New("invalid credit score")
-	ErrIncome      = errors.New("invalid income")
-	ErrLoanAmount  = errors.New("invalid loan amount")
-	ErrLoanTerm    = errors.New("invalid loan term")
+	errCreditScore = errors.New("invalid credit score")
+	errIncome      = errors.New("invalid income")
+	errLoanAmount  = errors.New("invalid loan amount")
+	errLoanTerm    = errors.New("invalid loan term")
 )
 
 func checkLoan(creditScore int, income float64, loanAmount float64, loanTerm float64) error {
@@ -29,22 +29,22 @@ func checkLoan(creditScore int, income float64, loanAmount float64, loanTerm flo
 
 	// validate score
 	if creditScore < 1 {
-		return ErrCreditScore
+		return errCreditScore
 	}
 
 	// validate income
 	if income < 1 {
-		return ErrIncome
+		return errIncome
 	}
 
 	// validate loan amount
 	if loanAmount < 1 {
-		return ErrLoanAmount
+		return errLoanAmount
 	}
 
 	// validate loan term
 	if loanTerm < 1 || int(loanTerm)%12 != 0 {
-		return ErrLoanTerm
+		return errLoanTerm
 	}
 
 	rate := interest / 100
