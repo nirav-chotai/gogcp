@@ -10,37 +10,28 @@ var (
 	ErrHoursWorked = errors.New("invalid hours worked per week")
 )
 
-func payDay(hoursWorked, hourlyRate int) (int, error) {
+func payDay(hoursWorked, hourlyRate int) int {
+	report := func() {
+		fmt.Printf("HoursWorked: %d\nHourlyRate: %d\n", hoursWorked, hourlyRate)
+	}
+	defer report()
+
 	if hourlyRate < 10 || hourlyRate > 75 {
-		return 0, ErrHourlyRate
+		panic(ErrHourlyRate)
 	}
 	if hoursWorked < 0 || hoursWorked > 80 {
-		return 0, ErrHoursWorked
+		panic(ErrHoursWorked)
 	}
 	if hoursWorked > 40 {
 		hoursOver := hoursWorked - 40
 		overTime := hoursOver * 2
 		regularPay := hoursWorked * hourlyRate
-		return regularPay + overTime, nil
+		return regularPay + overTime
 	}
-	return hoursWorked * hourlyRate, nil
+	return hoursWorked * hourlyRate
 }
 
 func main() {
-
-	pay, err := payDay(81, 50)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	pay, err = payDay(80, 5)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	pay, err = payDay(80, 50)
-	if err != nil {
-		fmt.Println(err)
-	}
+	pay := payDay(81, 50)
 	fmt.Println(pay)
 }
