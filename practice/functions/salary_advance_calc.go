@@ -11,7 +11,7 @@ type employee struct {
 }
 
 type developer struct {
-	Individual Employee
+	Individual employee
 	HourlyRate int
 	WorkWeek   [7]int
 }
@@ -29,7 +29,7 @@ const (
 )
 
 func saladvance() {
-	d := Developer{Individual: Employee{ID: 1, FirstName: "Nirav", LastName: "Chotai"}, HourlyRate: 10}
+	d := developer{Individual: employee{ID: 1, FirstName: "Nirav", LastName: "Chotai"}, HourlyRate: 10}
 	x := nonLoggedHours()
 	fmt.Println("Tracking hours worked thus far today: ", x(2))
 	fmt.Println("Tracking hours worked thus far today: ", x(3))
@@ -52,11 +52,11 @@ func nonLoggedHours() func(int) int {
 	}
 }
 
-func (d *Developer) loggedHours(day weekday, hours int) {
+func (d *developer) loggedHours(day weekday, hours int) {
 	d.WorkWeek[day] = hours
 }
 
-func (d *Developer) hoursWorked() int {
+func (d *developer) hoursWorked() int {
 	total := 0
 	for _, v := range d.WorkWeek {
 		total += v
@@ -64,7 +64,7 @@ func (d *Developer) hoursWorked() int {
 	return total
 }
 
-func (d *Developer) payDay() (int, bool) {
+func (d *developer) payDay() (int, bool) {
 	if d.hoursWorked() > 40 {
 		hoursOver := d.hoursWorked() - 40
 		overTime := hoursOver * 2
@@ -74,7 +74,7 @@ func (d *Developer) payDay() (int, bool) {
 	return d.hoursWorked() * d.HourlyRate, false
 }
 
-func (d *Developer) payDetails() {
+func (d *developer) payDetails() {
 	for i, v := range d.WorkWeek {
 		switch i {
 		case 0:
