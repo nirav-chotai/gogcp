@@ -15,26 +15,26 @@ type directDeposit struct {
 }
 
 var (
-	errInvalidLastName      = errors.New("invalid last name")
-	errInvalidRoutingNumber = errors.New("invalid routing number")
+	errInvalidLastNames      = errors.New("invalid last name")
+	errInvalidRoutingNumbers = errors.New("invalid routing number")
 )
 
 func (dd *directDeposit) validateRoutingNumber() {
 	defer func() {
 		r := recover()
-		if r == ErrInvalidRoutingNumber {
+		if r == errInvalidRoutingNumbers {
 			fmt.Println("invalid routing number")
 		}
 	}()
 	if dd.routingNumber < 100 {
-		panic(ErrInvalidRoutingNumber)
+		panic(errInvalidRoutingNumbers)
 	}
 }
 
 func (dd *directDeposit) validateLastName() error {
 	dd.lastName = strings.TrimSpace(dd.lastName)
 	if len(dd.lastName) == 0 {
-		return ErrInvalidLastName
+		return errInvalidLastNames
 	}
 	return nil
 }
