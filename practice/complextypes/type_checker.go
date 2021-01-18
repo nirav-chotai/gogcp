@@ -1,0 +1,37 @@
+// Activity 4.06
+
+package complextypes
+
+import "fmt"
+
+func getData() []interface{} {
+	return []interface{}{
+		1,
+		3.14,
+		"hello",
+		true,
+		struct{}{},
+	}
+}
+
+func getTypeName(v interface{}) string {
+	switch v.(type) {
+	case int, int32, int64:
+		return "int"
+	case float32, float64:
+		return "float"
+	case bool:
+		return "bool"
+	case string:
+		return "string"
+	default:
+		return "unknown"
+	}
+}
+
+func checktype() {
+	data := getData()
+	for i := 0; i < len(data); i++ {
+		fmt.Printf("%v is %v\n", data[i], getTypeName(data[i]))
+	}
+}

@@ -1,0 +1,16 @@
+package coretypes
+
+import (
+	"fmt"
+	"runtime"
+)
+
+func memusage() {
+	var list []int
+	for i := 0; i < 10000000; i++ {
+		list = append(list, 100)
+	}
+	var m runtime.MemStats
+	runtime.ReadMemStats(&m)
+	fmt.Printf("TotalAlloc (Heap) = %v MiB\n", m.TotalAlloc/1024/1024)
+}
