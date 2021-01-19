@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func main() {
+func users() {
 	usernames := map[string]string{"Sammy": "sammy-shark", "Jamie": "mantisshrimp54"}
 
 	for {
